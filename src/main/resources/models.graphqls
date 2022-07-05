@@ -1,0 +1,21 @@
+schema {
+    query : Query
+}
+
+type Query {
+    assets(assetType: String, scoreType: Int): Int
+    asset(id: String): Asset
+}
+
+type Asset {
+    id: String
+    name: String
+    assetType: String
+    scores: [Score]
+    sum: Int
+}
+
+type Score {
+    type: String
+    value: Int
+}
