@@ -21,8 +21,7 @@ public class AssetDataFetcher implements DataFetcher<Asset> {
     @Override
     public Asset get(DataFetchingEnvironment env) {
         Map args = env.getArguments();
-        Asset asset = assetService.findAssetById(UUID.fromString((String) args.get("id")));
-        return asset;
+        return assetService.findAssetById(UUID.fromString((String) args.get("id")));
 
     }
 }

@@ -24,7 +24,7 @@ public class AssetServiceImpl implements AssetService {
 
     @Override
     public Asset findAssetById(UUID uuid) {
-        Optional<Asset> assetOptional = Optional.ofNullable(assetRepository.findOne(uuid));
+        Optional<Asset> assetOptional = assetRepository.findById(uuid);
         if(assetOptional.isEmpty()) {
             throw new AssetNotFoundException("No existing asset with id: " + uuid);
         }

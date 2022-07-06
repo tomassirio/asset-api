@@ -1,4 +1,4 @@
-package com.memorable.assetapi.utility.graphql;
+package com.memorable.assetapi.utility.graphQl;
 
 import com.memorable.assetapi.utility.dataFetcher.AssetByTypeAndScoreTypeDataFetcher;
 import com.memorable.assetapi.utility.dataFetcher.AssetDataFetcher;

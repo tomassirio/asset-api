@@ -20,10 +20,9 @@ public class AssetByTypeAndScoreTypeDataFetcher implements DataFetcher<Integer> 
     @Override
     public Integer get(DataFetchingEnvironment env) {
         Map args = env.getArguments();
-        Integer average = assetService.findScoreAverageByAssetTypeAndScoreType(
+        return assetService.findScoreAverageByAssetTypeAndScoreType(
                 AssetType.getAssetType((String) args.get("assetType")),
                 ScoreType.getScoreType((Integer) args.get("scoreType")));
-        return average;
 
     }
 }
