@@ -1,4 +1,4 @@
-package com.memorable.assetapi.dataLoader;
+package com.memorable.assetapi.utility.dataLoader;
 
 import com.memorable.assetapi.model.Asset;
 import com.memorable.assetapi.model.AssetType;
@@ -6,11 +6,9 @@ import com.memorable.assetapi.model.Score;
 import com.memorable.assetapi.model.ScoreType;
 import com.memorable.assetapi.repository.AssetRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
