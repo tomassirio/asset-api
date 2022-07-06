@@ -11,6 +11,6 @@ import java.util.UUID;
 
 @Repository
 public interface AssetRepository extends MongoRepository<Asset, UUID> {
-    @Query("{asset: { $assetType: ?0 } })")
+//    @Query("{asset: { $assetType: ?0 } })")
     List<Asset> findAssetsByAssetType(AssetType assetType);
 }

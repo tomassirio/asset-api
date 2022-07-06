@@ -51,6 +51,6 @@ public class AssetDataLoader {
                         ))
                         .build()
         );
-        assetRepository.save(assets);
+        assetRepository.saveAll(assets);
     }
 }
