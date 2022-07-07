@@ -2,6 +2,7 @@ package com.memorable.assetapi.utility.graphQl;
 
 import com.memorable.assetapi.utility.dataFetcher.AssetByTypeAndScoreTypeDataFetcher;
 import com.memorable.assetapi.utility.dataFetcher.AssetDataFetcher;
+import com.memorable.assetapi.utility.dataFetcher.CreateAssetDataFetcher;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -17,23 +18,30 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 
+import static com.memorable.assetapi.utility.graphQl.EndpointConstants.ASSETS_ENDPOINT;
+import static com.memorable.assetapi.utility.graphQl.EndpointConstants.ASSET_ENDPOINT;
+import static com.memorable.assetapi.utility.graphQl.EndpointConstants.CREATE_ASSET_ENDPOINT;
+import static com.memorable.assetapi.utility.graphQl.EndpointConstants.MUTATION;
+import static com.memorable.assetapi.utility.graphQl.EndpointConstants.QUERY;
 import static graphql.GraphQL.newGraphQL;
 import static graphql.schema.idl.RuntimeWiring.newRuntimeWiring;
 
 @Component
 public class GraphQlUtility {
 
-    @Value("classpath:schemas.graphqls")
+    @Value("classpath:asset.graphqls")
     private Resource schemaResource;
-    private GraphQL graphQL;
     private AssetByTypeAndScoreTypeDataFetcher assetByTypeAndScoreTypeDataFetcher;
     private AssetDataFetcher assetDataFetcher;
+    private CreateAssetDataFetcher createAssetDataFetcher;
 
     @Autowired
     GraphQlUtility(AssetByTypeAndScoreTypeDataFetcher assetByTypeAndScoreTypeDataFetcher,
-                   AssetDataFetcher assetDataFetcher) throws IOException {
+                   AssetDataFetcher assetDataFetcher,
+                   CreateAssetDataFetcher createAssetDataFetcher) throws IOException {
         this.assetByTypeAndScoreTypeDataFetcher = assetByTypeAndScoreTypeDataFetcher;
         this.assetDataFetcher = assetDataFetcher;
+        this.createAssetDataFetcher = createAssetDataFetcher;
     }
 
     @PostConstruct
@@ -48,9 +56,11 @@ public class GraphQlUtility {
 
     public RuntimeWiring buildRuntimeWiring() {
         return newRuntimeWiring()
-                .type("Query", typeWiring -> typeWiring
-                        .dataFetcher("assets", assetByTypeAndScoreTypeDataFetcher)
-                        .dataFetcher("asset", assetDataFetcher))
+                .type(QUERY, typeWiring -> typeWiring
+                        .dataFetcher(ASSETS_ENDPOINT, assetByTypeAndScoreTypeDataFetcher)
+                        .dataFetcher(ASSET_ENDPOINT, assetDataFetcher))
+                .type(MUTATION, typeWiring -> typeWiring
+                        .dataFetcher(CREATE_ASSET_ENDPOINT, createAssetDataFetcher))
                 .build();
     }
 
