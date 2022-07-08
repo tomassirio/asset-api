@@ -29,7 +29,7 @@ public class AssetServiceImpl implements AssetService {
                 .id(UUID.randomUUID())
                 .name(request.getName())
                 .assetType(AssetType.getAssetType(request.getAssetType()))
-                .ScoreTypes(request.getScores().stream().map(
+                .scores(request.getScores().stream().map(
                         score -> Score.builder()
                                 .value(score)
                                 .scoreType(ScoreType.getScoreType(score))
@@ -63,7 +63,7 @@ public class AssetServiceImpl implements AssetService {
     public Integer findScoreAverage(AssetType assetType, ScoreType scoreType) {
         List<Asset> assets = assetRepository.findAssetsByAssetType(assetType);
         Integer sum = assets.stream().map(
-                        asset -> asset.getScoreTypes().stream()
+                        asset -> asset.getScores().stream()
                                 .filter(score -> score.getScoreType().equals(scoreType))
                                 .findFirst()
                                 .orElseThrow(() -> new ScoreTypeException("Invalid ScoreType"))

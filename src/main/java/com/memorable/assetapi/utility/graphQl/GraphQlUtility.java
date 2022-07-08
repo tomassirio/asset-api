@@ -9,6 +9,7 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import graphql.schema.idl.TypeRuntimeWiring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -29,7 +30,7 @@ import static graphql.schema.idl.RuntimeWiring.newRuntimeWiring;
 @Component
 public class GraphQlUtility {
 
-    @Value("classpath:asset.graphqls")
+    @Value("classpath:graphql/asset.graphqls")
     private Resource schemaResource;
     private AssetByTypeAndScoreTypeDataFetcher assetByTypeAndScoreTypeDataFetcher;
     private AssetDataFetcher assetDataFetcher;

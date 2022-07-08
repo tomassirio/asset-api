@@ -15,7 +15,7 @@ public class TestUtils {
                 .id(UUID.fromString("0000325e-b7ca-4f6d-8b76-08464d993610"))
                 .name("asset")
                 .assetType(AssetType.IMAGE)
-                .ScoreTypes(
+                .scores(
                         List.of(
                                 Score.builder().scoreType(ScoreType.SCORE1).value(1).build(),
                                 Score.builder().scoreType(ScoreType.SCORE2).value(2).build(),

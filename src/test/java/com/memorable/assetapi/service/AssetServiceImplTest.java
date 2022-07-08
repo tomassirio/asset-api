@@ -2,6 +2,8 @@ package com.memorable.assetapi.service;
 
 import com.memorable.assetapi.exception.AssetNotFoundException;
 import com.memorable.assetapi.model.Asset;
+import com.memorable.assetapi.model.AssetType;
+import com.memorable.assetapi.model.ScoreType;
 import com.memorable.assetapi.repository.AssetRepository;
 import com.memorable.assetapi.service.impl.AssetServiceImpl;
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,8 +50,42 @@ public class AssetServiceImplTest {
 
         verify(assetRepository.findById(any()), Mockito.atLeastOnce());
     }
-//
-//    @Test
-//    public void when_
+
+    @Test
+    public void when_findAverage_with_assetType_image_and_scoreType1_then_return_valid_result() {
+        Integer expectedResult = 1;
+        when(assetRepository.findAssetsByAssetType(any())).thenReturn(List.of(createAsset(), createAsset(), createAsset()));
+
+        Integer result = assetService.findScoreAverage(AssetType.IMAGE, ScoreType.SCORE1);
+
+        verify(assetRepository, Mockito.times(1)).findAssetsByAssetType(any());
+
+        assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void when_findAverage_with_assetType_image_and_scoreType2_then_return_valid_result() {
+        Integer expectedResult = 2;
+        when(assetRepository.findAssetsByAssetType(any())).thenReturn(List.of(createAsset(), createAsset(), createAsset()));
+
+        Integer result = assetService.findScoreAverage(AssetType.IMAGE, ScoreType.SCORE2);
+
+        verify(assetRepository, Mockito.times(1)).findAssetsByAssetType(any());
+
+        assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void when_findAverage_with_assetType_image_and_scoreType3_then_return_valid_result() {
+        Integer expectedResult = 3;
+        when(assetRepository.findAssetsByAssetType(any())).thenReturn(List.of(createAsset(), createAsset(), createAsset()));
+
+        Integer result = assetService.findScoreAverage(AssetType.IMAGE, ScoreType.SCORE3);
+
+        verify(assetRepository, Mockito.times(1)).findAssetsByAssetType(any());
+
+        assertEquals(result, expectedResult);
+    }
+
 
 }

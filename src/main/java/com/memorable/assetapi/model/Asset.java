@@ -19,5 +19,5 @@ public class Asset {
     private UUID id;
     private AssetType assetType;
     private String name;
-    List<Score> ScoreTypes;
+    List<Score> scores;
 }

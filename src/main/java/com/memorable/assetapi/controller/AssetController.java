@@ -28,10 +28,4 @@ public class AssetController {
         ExecutionResult result = graphQL.execute(query);
         return ResponseEntity.ok(result.getData());
     }
-
-    @PostMapping(value = "/mutation")
-    public ResponseEntity mutation(@RequestBody String query) {
-        ExecutionResult result = graphQL.execute(query);
-        return ResponseEntity.ok(result.getData());
-    }
 }

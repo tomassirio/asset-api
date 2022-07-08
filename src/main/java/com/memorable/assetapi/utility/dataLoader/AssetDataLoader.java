@@ -24,7 +24,7 @@ public class AssetDataLoader {
                         .id(UUID.randomUUID())
                         .name("asset1")
                         .assetType(AssetType.VIDEO)
-                        .ScoreTypes(List.of(
+                        .scores(List.of(
                                 Score.builder().scoreType(ScoreType.SCORE1).value(4).build(),
                                 Score.builder().scoreType(ScoreType.SCORE2).value(8).build(),
                                 Score.builder().scoreType(ScoreType.SCORE3).value(15).build()
@@ -34,7 +34,7 @@ public class AssetDataLoader {
                         .id(UUID.randomUUID())
                         .name("asset2")
                         .assetType(AssetType.IMAGE)
-                        .ScoreTypes(List.of(
+                        .scores(List.of(
                                 Score.builder().scoreType(ScoreType.SCORE1).value(16).build(),
                                 Score.builder().scoreType(ScoreType.SCORE2).value(23).build(),
                                 Score.builder().scoreType(ScoreType.SCORE3).value(42).build()
@@ -44,7 +44,7 @@ public class AssetDataLoader {
                         .id(UUID.randomUUID())
                         .name("asset3")
                         .assetType(AssetType.VIDEO)
-                        .ScoreTypes(List.of(
+                        .scores(List.of(
                                 Score.builder().scoreType(ScoreType.SCORE1).value(69).build(),
                                 Score.builder().scoreType(ScoreType.SCORE2).value(42).build(),
                                 Score.builder().scoreType(ScoreType.SCORE3).value(0).build()
