@@ -1,6 +1,7 @@
 package com.memorable.assetapi.service.impl;
 
 import com.memorable.assetapi.exception.AssetNotFoundException;
+import com.memorable.assetapi.exception.AssetValidationException;
 import com.memorable.assetapi.exception.ScoreTypeException;
 import com.memorable.assetapi.model.Asset;
 import com.memorable.assetapi.model.AssetType;
@@ -9,8 +10,12 @@ import com.memorable.assetapi.model.ScoreType;
 import com.memorable.assetapi.repository.AssetRepository;
 import com.memorable.assetapi.service.AssetService;
 import com.memorable.assetapi.model.request.AssetRequest;
+import com.memorable.assetapi.validator.AssetValidator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.ValidationUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AssetServiceImpl implements AssetService {
 
     private final AssetRepository assetRepository;
@@ -36,6 +42,12 @@ public class AssetServiceImpl implements AssetService {
                                 .build())
                         .collect(Collectors.toList()))
                 .build();
+        BeanPropertyBindingResult result = new BeanPropertyBindingResult(newAsset, "asset");
+        ValidationUtils.invokeValidator(new AssetValidator(), newAsset, result);
+        if (result.getAllErrors().size() > 0) {
+            result.getAllErrors().forEach(e -> log.error(e.getObjectName()));
+           throw new AssetValidationException("Invalid asset request");
+        }
         return assetRepository.save(newAsset);
     }
 

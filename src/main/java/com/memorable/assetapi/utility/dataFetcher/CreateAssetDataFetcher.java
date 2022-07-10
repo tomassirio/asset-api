@@ -21,6 +21,7 @@ public class CreateAssetDataFetcher implements DataFetcher<Asset> {
     @Override
     public Asset get(DataFetchingEnvironment env) {
         Map args = env.getArguments();
+
         return assetService.createAsset(objectMapper.convertValue(args, AssetRequest.class));
 
     }

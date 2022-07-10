@@ -4,6 +4,7 @@ import com.memorable.assetapi.model.Asset;
 import com.memorable.assetapi.model.AssetType;
 import com.memorable.assetapi.model.Score;
 import com.memorable.assetapi.model.ScoreType;
+import com.memorable.assetapi.model.request.AssetRequest;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +23,14 @@ public class TestUtils {
                                 Score.builder().scoreType(ScoreType.SCORE3).value(3).build()
                         )
                 )
+                .build();
+    }
+
+    public static AssetRequest createRequest() {
+        return AssetRequest.builder()
+                .name("asset")
+                .assetType("image")
+                .scores(List.of(1,2,3))
                 .build();
     }
 }

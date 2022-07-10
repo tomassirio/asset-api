@@ -3,6 +3,7 @@ package com.memorable.assetapi.validator;
 import com.memorable.assetapi.model.Asset;
 import com.memorable.assetapi.model.AssetType;
 import com.memorable.assetapi.model.Score;
+import com.memorable.assetapi.model.ScoreType;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -34,7 +35,7 @@ public class AssetValidator implements Validator {
                 e.rejectValue("scores", "score.invalid-value");
             }
         }
-        if(asset.getScores().size() != AssetType.values().length) {
+        if(asset.getScores().size() != ScoreType.values().length) {
             e.rejectValue("scores", "score.score-count-invalid");
         }
     }

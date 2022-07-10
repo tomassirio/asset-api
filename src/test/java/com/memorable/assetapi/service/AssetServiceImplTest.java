@@ -1,9 +1,11 @@
 package com.memorable.assetapi.service;
 
 import com.memorable.assetapi.exception.AssetNotFoundException;
+import com.memorable.assetapi.exception.AssetValidationException;
 import com.memorable.assetapi.model.Asset;
 import com.memorable.assetapi.model.AssetType;
 import com.memorable.assetapi.model.ScoreType;
+import com.memorable.assetapi.model.request.AssetRequest;
 import com.memorable.assetapi.repository.AssetRepository;
 import com.memorable.assetapi.service.impl.AssetServiceImpl;
 import org.junit.Test;
@@ -18,7 +20,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.memorable.assetapi.utils.TestUtils.createAsset;
+import static com.memorable.assetapi.utils.TestUtils.createRequest;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -85,6 +90,28 @@ public class AssetServiceImplTest {
         verify(assetRepository, Mockito.times(1)).findAssetsByAssetType(any());
 
         assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void when_createAsset_with_valid_assetRequest_return_asset() {
+        Asset expectedResult = createAsset();
+        when(assetRepository.save(any())).thenReturn(expectedResult);
+
+        AssetRequest request = createRequest();
+        Asset result = assetService.createAsset(request);
+
+        assertEquals(result.getName(), expectedResult.getName());
+        assertEquals(result.getAssetType(), expectedResult.getAssetType());
+        assertTrue(result.getScores().containsAll(expectedResult.getScores()));
+
+        verify(assetRepository, Mockito.times(1)).save(any());
+    }
+
+    @Test(expected = AssetValidationException.class)
+    public void when_createAsset_with_invalid_assetRequest_throw_assetValidationException() {
+        AssetRequest request = createRequest();
+        request.setName(null);
+        assetService.createAsset(request);
     }
 
 
